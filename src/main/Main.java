@@ -1,97 +1,41 @@
 package main;
 
-class Animal {
-    private String name;
-    private int age;
-    private double weight;
-
-    public Animal(String name, int age, double weight) {
-        this.name = name;
-        this.age = age;
-        this.weight = weight;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public void printBasicInfo() {
-        System.out.println("Name : " + name);
-        System.out.println("Age : " + age);
-        System.out.println("Weight : " + weight);
-    }
-}
-
-class Eagle extends Animal {
-    private double wingspan;
-
-    public double getWingspan() {
-        return wingspan;
-    }
-
-    public void setWingspan(double wingspan) {
-        this.wingspan = wingspan;
-    }
-
-    public void animalDetails() {
-        super.printBasicInfo();
-        System.out.println("Wingspan : " + wingspan);
-    }
-
-    public Eagle(String name, int age, double weight, double wingspan) {
-        super(name, age, weight);
-        this.wingspan = wingspan;
-    }
-}
-
-class Snake extends Animal {
-    private boolean venomous;
-
-    public boolean getVenomous() {
-        return venomous;
-    }
-
-    public void setVenomous(boolean venomous) {
-        this.venomous = venomous;
-    }
-
-    public void animalDetails() {
-        super.printBasicInfo();
-        System.out.println("Venomous : " + venomous);
-    }
-
-    public Snake(String name, int age, double weight, boolean venomous) {
-        super(name, age, weight);
-        this.venomous = venomous;
-    }
-}
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Eagle eagle = new Eagle("Eagle1", 5, 6.5, 2.1);
-        Snake snake = new Snake("Snake1", 3, 1.5, true);
+        Scanner in = new Scanner(System.in);
+        while (true) {
+            System.out.print("source 온도체계(C,F) 혹은 종료하려면 exit를 입력하세요 : ");
+            String answer = in.next();
 
-        eagle.animalDetails();
-        snake.animalDetails();
+            if (answer.equals("exit")) {
+                System.out.println("프로그램을 종료합니다.");
+                break;
+            }
+
+            if (answer.equals("C")) {
+                System.out.print("섭씨로 온도를 입력하세요 : ");
+                double c = in.nextDouble();
+                celsiusToFahrenheit(c);
+            }
+            else if (answer.equals("F")) {
+                System.out.print("화씨로 온도를 입력하세요 : ");
+                double f = in.nextDouble();
+                fahrenheitToCelsius(f);
+            }
+        }
+    }
+
+    public static double celsiusToFahrenheit(double celsius) {
+        double fahrenheit = (celsius * 1.8) + 32;
+        System.out.printf("섭씨 %.1f도는 화씨 %.1f도입니다.\n\n", celsius, fahrenheit);
+        return fahrenheit;
+    }
+
+    public static double fahrenheitToCelsius(double fahrenheit) {
+        double celsius = (fahrenheit - 32) / 1.8;
+        System.out.printf("화씨 %.1f도는 섭씨 %.1f도입니다.\n\n", fahrenheit, celsius);
+        return celsius;
     }
 }
